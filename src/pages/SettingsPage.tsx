@@ -32,9 +32,9 @@ export const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4 p-4 sm:p-6 max-w-4xl mx-auto text-xs">
+    <div className="space-y-4 p-4 sm:p-6 max-w-4xl mx-auto text-xs w-full min-w-0">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2 py-0.5 bg-blue-100 text-gov-blue text-[10px] font-bold uppercase rounded font-mono">
@@ -43,7 +43,7 @@ export const SettingsPage: React.FC = () => {
           </div>
           <h1 className="text-base font-bold text-gov-navy uppercase tracking-wide flex items-center gap-2 mt-1">
             <Settings className="w-5 h-5 text-gov-blue" />
-            <span>Cadastral Governance Platform Configuration & Geodetic Parameters</span>
+            <span>Cadastral Governance Platform Configuration</span>
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Coordinate Reference Systems (CRS), deep-learning inference tolerances, CORS RTK caster endpoints, and topology rules.
@@ -52,7 +52,7 @@ export const SettingsPage: React.FC = () => {
 
         <button
           onClick={handleSaveSettings}
-          className="px-4 py-1.5 bg-gov-blue hover:bg-gov-navy text-white rounded text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition shadow-sm"
+          className="w-full sm:w-auto px-4 py-2 bg-gov-blue hover:bg-gov-navy text-white rounded text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition shadow-sm min-h-[38px]"
         >
           <Save className="w-3.5 h-3.5" />
           <span>Save Settings</span>

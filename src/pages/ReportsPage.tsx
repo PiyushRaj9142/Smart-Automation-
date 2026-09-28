@@ -153,7 +153,7 @@ export const ReportsPage: React.FC = () => {
       </div>
 
       {/* Report Type Selector Tabs */}
-      <div className="no-print grid grid-cols-2 sm:grid-cols-5 gap-2">
+      <div className="no-print grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {reportTypes.map((type) => {
           const Icon = type.icon;
           const isSelected = selectedReportType === type.id;

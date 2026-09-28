@@ -94,76 +94,58 @@ export const CitizenPortalPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-800 selection:bg-purple-600 selection:text-white">
-      {/* Top Citizen Ministry Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
-        <div className="bg-gov-navy text-white text-[11px] px-4 py-1.5 flex items-center justify-between border-b border-slate-700">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-amber-300">🏛 CITIZEN CADASTRAL SERVICES PORTAL</span>
-            <span className="text-slate-400 hidden sm:inline">| Urban Land Records & Title Registry</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-[11px]">
-            <span className="text-slate-300 font-mono">PUBLIC PORTAL &bull; SECURE SSL</span>
-            <button
-              onClick={() => setCurrentRole('GOVERNMENT_ADMIN')}
-              className="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded border border-slate-700 transition"
-            >
-              Staff Login &rarr;
-            </button>
-          </div>
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-800 selection:bg-purple-600 selection:text-white w-full min-w-0">
+      {/* Sub-Header Navigation Tabs */}
+      <div className="bg-white border-b border-slate-200 shadow-xs sticky top-0 z-30">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded bg-purple-50 text-purple-700">
-              <Building2 className="w-5 h-5" />
+            <div className="p-2 rounded bg-purple-50 text-purple-700 flex-shrink-0">
+              <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-gov-navy">
+              <h1 className="text-sm sm:text-base font-bold text-gov-navy">
                 Public Land Records & Parcel Search
               </h1>
-              <p className="text-[11px] text-slate-500">
-                Authorized by Directorate of Land Records & Settlement, Government of Madhya Pradesh
+              <p className="text-[10px] sm:text-[11px] text-slate-500">
+                Official Cadastral Land Title & Grievance Registry
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-semibold">
+          <div className="grid grid-cols-3 sm:flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-semibold">
             <button
               onClick={() => setActiveTab('search')}
-              className={`px-3 py-1.5 rounded-md transition ${
+              className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-md transition text-center min-h-[36px] sm:min-h-[32px] flex items-center justify-center ${
                 activeTab === 'search'
-                  ? 'bg-white text-purple-900 shadow-xs'
+                  ? 'bg-white text-purple-900 shadow-xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Search Property
+              Search
             </button>
             <button
               onClick={() => setActiveTab('report')}
-              className={`px-3 py-1.5 rounded-md transition ${
+              className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-md transition text-center min-h-[36px] sm:min-h-[32px] flex items-center justify-center ${
                 activeTab === 'report'
-                  ? 'bg-white text-purple-900 shadow-xs'
+                  ? 'bg-white text-purple-900 shadow-xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Report Boundary Issue
+              Report Issue
             </button>
             <button
               onClick={() => setActiveTab('track')}
-              className={`px-3 py-1.5 rounded-md transition ${
+              className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-md transition text-center min-h-[36px] sm:min-h-[32px] flex items-center justify-center ${
                 activeTab === 'track'
-                  ? 'bg-white text-purple-900 shadow-xs'
+                  ? 'bg-white text-purple-900 shadow-xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Track Application ({grievances.length})
+              Track ({grievances.length})
             </button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 space-y-6">

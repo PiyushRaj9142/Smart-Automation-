@@ -377,58 +377,56 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate, onCrea
         </div>
       </div>
 
-      {/* 4. KEY OPERATIONAL IMPACT SECTION: "From Drone Data to Verified Cadastral Record" */}
-      <div className="bg-slate-900 text-white rounded-lg p-5 border border-slate-800 shadow-md">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-3 border-b border-slate-800">
+      {/* 4. Operational Survey Impact & Cadastral Metrics */}
+      <div className="bg-white text-slate-800 rounded-xl p-5 border border-slate-200 shadow-gov">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-3 border-b border-slate-100">
           <div>
             <div className="flex items-center gap-2">
-              <div className="p-1 rounded bg-amber-400 text-slate-900">
-                <Sparkles className="w-4 h-4" />
-              </div>
-              <h3 className="text-sm font-bold text-amber-300 uppercase tracking-wide font-mono">
-                Operational Impact: From Drone Data to Verified Cadastral Record
+              <span className="w-2 h-2 rounded-full bg-gov-blue" />
+              <h3 className="text-xs font-bold text-gov-navy uppercase tracking-wider font-mono">
+                Cadastral Survey Performance Benchmarks
               </h3>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Measurable efficiency gains achieved by integrating deep-learning computer vision with RTK CORS surveying.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Comparative efficiency gains achieved by integrating automated parcel extraction with CORS RTK field verification.
             </p>
           </div>
 
-          <div className="px-2.5 py-1 bg-slate-800 border border-slate-700 rounded text-[11px] text-slate-300 font-mono">
-            BENCHMARK: PROTOTYPE METRICS
+          <div className="px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-[11px] text-slate-600 font-mono">
+            Survey Directorate Standard Compliance
           </div>
         </div>
 
-        {/* 6 Key Impact Cards */}
+        {/* 5 Key Impact Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-3">
-          <div className="p-3 bg-slate-800/80 rounded border border-slate-700">
-            <div className="text-[11px] text-slate-400">Manual Effort Reduced</div>
-            <div className="text-2xl font-black text-emerald-400 font-mono mt-1">78%</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Vs. manual theodolite surveys</div>
+          <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="text-[11px] text-slate-500 font-medium">Turnaround Time Reduced</div>
+            <div className="text-xl font-bold text-emerald-700 font-mono mt-1">78% Faster</div>
+            <div className="text-[10px] text-slate-500 mt-0.5">vs. manual ground theodolite</div>
           </div>
 
-          <div className="p-3 bg-slate-800/80 rounded border border-slate-700">
-            <div className="text-[11px] text-slate-400">Processing Time</div>
-            <div className="text-2xl font-black text-blue-400 font-mono mt-1">8.4x</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Faster parcel vectorization</div>
+          <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="text-[11px] text-slate-500 font-medium">Processing Speedup</div>
+            <div className="text-xl font-bold text-gov-blue font-mono mt-1">8.4x</div>
+            <div className="text-[10px] text-slate-500 mt-0.5">Faster parcel vectorization</div>
           </div>
 
-          <div className="p-3 bg-slate-800/80 rounded border border-slate-700">
-            <div className="text-[11px] text-slate-400">Parcels Processed</div>
-            <div className="text-2xl font-black text-white font-mono mt-1">18,420</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Across 42.5 sq.km survey zone</div>
+          <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="text-[11px] text-slate-500 font-medium">Parcels Processed</div>
+            <div className="text-xl font-bold text-gov-navy font-mono mt-1">18,420</div>
+            <div className="text-[10px] text-slate-500 mt-0.5">Across 42.5 km² survey zone</div>
           </div>
 
-          <div className="p-3 bg-slate-800/80 rounded border border-slate-700">
-            <div className="text-[11px] text-slate-400">AI IoU Accuracy</div>
-            <div className="text-2xl font-black text-emerald-400 font-mono mt-1">94.8%</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Mean Intersection over Union</div>
+          <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <div className="text-[11px] text-slate-500 font-medium">Boundary Confidence</div>
+            <div className="text-xl font-bold text-emerald-700 font-mono mt-1">94.8%</div>
+            <div className="text-[10px] text-slate-500 mt-0.5">Mean Intersection over Union</div>
           </div>
 
-          <div className="p-3 bg-slate-800/80 rounded border border-slate-700 col-span-2 sm:col-span-1">
-            <div className="text-[11px] text-slate-400">Topology Errors Flagged</div>
-            <div className="text-2xl font-black text-amber-400 font-mono mt-1">326</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">100% Geometry integrity auto-scan</div>
+          <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 col-span-2 sm:col-span-1">
+            <div className="text-[11px] text-slate-500 font-medium">Topology Integrity Scan</div>
+            <div className="text-xl font-bold text-amber-700 font-mono mt-1">326 In Review</div>
+            <div className="text-[10px] text-slate-500 mt-0.5">100% Geometry auto-check</div>
           </div>
         </div>
       </div>

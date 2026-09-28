@@ -68,15 +68,15 @@ export const AuditLogPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-300 rounded text-emerald-900 text-xs font-mono font-medium">
-            <ShieldCheck className="w-4 h-4 text-emerald-700" />
-            <span>TAMPER-EVIDENT LEDGER: ACTIVE (SHA-256)</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-300 rounded text-emerald-900 text-[11px] sm:text-xs font-mono font-medium">
+            <ShieldCheck className="w-4 h-4 text-emerald-700 flex-shrink-0" />
+            <span className="truncate">TAMPER-EVIDENT: ACTIVE (SHA-256)</span>
           </div>
 
           <button
             onClick={handleExportCSV}
-            className="px-3.5 py-1.5 border border-slate-300 rounded bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"
+            className="px-3.5 py-1.5 border border-slate-300 rounded bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition min-h-[34px]"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export Audit Trail</span>

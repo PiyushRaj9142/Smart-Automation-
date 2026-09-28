@@ -16,9 +16,9 @@ interface QRCodeModalProps {
 export const QRCodeModal: React.FC<QRCodeModalProps> = ({
   isOpen,
   onClose,
-  entityId = 'CG-1024',
-  title = 'Official Materiel QR Manifest',
-  qrPayload = 'EXP-CARGO-CG-1024-OXY-HIGH-ALT',
+  entityId = 'UPM-02481',
+  title = 'Cadastral Parcel Land Record QR',
+  qrPayload = 'CADASTRE-UPM-02481-JAIPUR-ZONE-04-VERIFIED',
   mode = 'generate',
   onScanResult
 }) => {
@@ -50,13 +50,13 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={activeTab === 'generate' ? `QR Manifest Code — ${entityId}` : 'Materiel & Checkpoint Optical Scanner'}
-      subtitle="Encrypted Military/Government Telemetry Format ISO/IEC 18004"
+      title={activeTab === 'generate' ? `Cadastral QR Record — ${entityId}` : 'Optical QR Scanner'}
+      subtitle="Standard Cadastral Land Record Telemetry Format ISO/IEC 18004"
       maxWidth="md"
       footer={
         <div className="flex items-center justify-between w-full">
           <div className="text-[11px] font-mono text-slate-500">
-            FORMAT: SEC-QR-256
+            FORMAT: CAD-QR-256
           </div>
           <button
             onClick={onClose}
@@ -210,37 +210,37 @@ export const QRCodeModal: React.FC<QRCodeModalProps> = ({
             <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
               Simulate Optical Tag Scan:
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
-                onClick={() => simulateScan('EXP-CARGO-CG-1024-OXY-HIGH-ALT')}
+                onClick={() => simulateScan('CAD-PARCEL-UPM-02481-RES-JAIPUR')}
                 className="p-2 rounded border border-slate-200 bg-slate-50 hover:bg-blue-50 text-left text-xs transition"
               >
-                <div className="font-bold text-gov-navy">CG-1024 (Oxygen Cylinders)</div>
-                <div className="text-[10px] text-slate-500 font-mono">Diskit Logistics Node</div>
+                <div className="font-bold text-gov-navy">UPM-02481 (Residential)</div>
+                <div className="text-[10px] text-slate-500 font-mono">Jaipur Zone 04 - Sector B</div>
               </button>
 
               <button
-                onClick={() => simulateScan('EXP-CARGO-CG-1025-MED-TRAUMA')}
+                onClick={() => simulateScan('CAD-PARCEL-UPM-02482-COM-JAIPUR')}
                 className="p-2 rounded border border-slate-200 bg-slate-50 hover:bg-blue-50 text-left text-xs transition"
               >
-                <div className="font-bold text-gov-navy">CG-1025 (Trauma Surgical)</div>
-                <div className="text-[10px] text-slate-500 font-mono">Panikhar Camp</div>
+                <div className="font-bold text-gov-navy">UPM-02482 (Commercial)</div>
+                <div className="text-[10px] text-slate-500 font-mono">Jaipur Zone 04 - High Street</div>
               </button>
 
               <button
-                onClick={() => simulateScan('EXP-CHECKPOINT-CP-03-NORTH-PULLU')}
+                onClick={() => simulateScan('CAD-BENCHMARK-BM-04-CORS-RTK')}
                 className="p-2 rounded border border-slate-200 bg-slate-50 hover:bg-blue-50 text-left text-xs transition"
               >
-                <div className="font-bold text-gov-navy">CP-03 (North Pullu)</div>
-                <div className="text-[10px] text-slate-500 font-mono">Checkpoint Staging</div>
+                <div className="font-bold text-gov-navy">BM-04 (CORS Benchmark)</div>
+                <div className="text-[10px] text-slate-500 font-mono">Survey Benchmark Pillar</div>
               </button>
 
               <button
-                onClick={() => simulateScan('EXP-PERSONNEL-P-1024-RAHUL')}
+                onClick={() => simulateScan('CAD-SURVEYOR-SURV-102-RAHUL')}
                 className="p-2 rounded border border-slate-200 bg-slate-50 hover:bg-blue-50 text-left text-xs transition"
               >
-                <div className="font-bold text-gov-navy">P-1024 (Rahul Kumar)</div>
-                <div className="text-[10px] text-slate-500 font-mono">Field Operations Lead</div>
+                <div className="font-bold text-gov-navy">Rahul Kumar (Surveyor)</div>
+                <div className="text-[10px] text-slate-500 font-mono">Field Crew #2 Lead</div>
               </button>
             </div>
           </div>

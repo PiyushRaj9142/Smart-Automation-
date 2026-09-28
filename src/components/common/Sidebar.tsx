@@ -24,13 +24,17 @@ interface SidebarProps {
   onSelectModule: (moduleId: string) => void;
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
+  isMobileDrawer?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   activeModuleId,
   onSelectModule,
   collapsed,
-  setCollapsed
+  setCollapsed,
+  isMobileDrawer = false,
+  onCloseMobile
 }) => {
   const { topologyIssues, parcels, kpis } = useCadastre();
 
@@ -43,60 +47,62 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       title: 'COMMAND & PROJECTS',
       items: [
-        { id: 'dashboard', label: '1. Dashboard', icon: LayoutDashboard },
-        { id: 'projects', label: '2. Projects', icon: Compass, badge: kpis.totalProjects, badgeType: 'info' as const },
-        { id: 'drone-datasets', label: '3. Drone Datasets', icon: Layers }
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { id: 'projects', label: 'Projects', icon: Compass, badge: kpis.totalProjects, badgeType: 'info' as const },
+        { id: 'drone-datasets', label: 'Drone Datasets', icon: Layers }
       ]
     },
     {
-      title: 'AI PIPELINE & GIS',
+      title: 'EXTRACTION & GIS',
       items: [
-        { id: 'ai-processing', label: '4. AI Processing', icon: Brain },
-        { id: 'gis-map', label: '5. Parcel Maps', icon: MapPin },
+        { id: 'ai-processing', label: 'Automated Processing', icon: Brain },
+        { id: 'gis-map', label: 'GIS Parcel Map', icon: MapPin },
         {
           id: 'topology',
-          label: '6. Topology Validation',
+          label: 'Topology Validation',
           icon: AlertTriangle,
           badge: openTopologyCount > 0 ? openTopologyCount : undefined,
           badgeType: 'danger' as const
         },
-        { id: 'ground-truth', label: '7. Ground Truth (GT)', icon: Radio }
+        { id: 'ground-truth', label: 'Ground Truth & GNSS', icon: Radio }
       ]
     },
     {
       title: 'GOVERNANCE & APPROVALS',
       items: [
-        { id: 'surveyors', label: '8. Surveyors', icon: Users },
+        { id: 'surveyors', label: 'Surveyor Roster', icon: Users },
         {
           id: 'approvals',
-          label: '9. Approvals & Gazette',
+          label: 'Gazette Approvals',
           icon: FileCheck,
           badge: pendingApprovalsCount > 0 ? pendingApprovalsCount : undefined,
           badgeType: 'warning' as const
         },
-        { id: 'reports', label: '10. Reports & Exports', icon: FileText }
+        { id: 'reports', label: 'Reports & Exports', icon: FileText }
       ]
     },
     {
-      title: 'AUDIT & CONFIGURATION',
+      title: 'ADMINISTRATION',
       items: [
-        { id: 'audit-log', label: '11. Audit Logs', icon: Database },
-        { id: 'settings', label: '12. Settings', icon: Settings }
+        { id: 'audit-log', label: 'Audit Logs', icon: Database },
+        { id: 'settings', label: 'System Settings', icon: Settings }
       ]
     }
   ];
 
   return (
     <aside
-      className={`bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-200 z-30 select-none ${
-        collapsed ? 'w-16' : 'w-64'
+      className={`bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-200 select-none ${
+        isMobileDrawer
+          ? 'w-full h-full'
+          : `hidden lg:flex z-30 ${collapsed ? 'w-16' : 'w-64'}`
       }`}
     >
       {/* Navigation List */}
-      <div className="py-2 overflow-y-auto max-h-[calc(100vh-85px)]">
+      <div className="py-2 overflow-y-auto max-h-[calc(100vh-85px)] flex-1">
         {navSections.map((section, sIdx) => (
           <div key={section.title} className={sIdx > 0 ? 'mt-3 pt-3 border-t border-slate-100' : ''}>
-            {!collapsed && (
+            {(!collapsed || isMobileDrawer) && (
               <div className="px-4 py-1 text-[10px] font-bold font-mono tracking-wider text-slate-400 uppercase">
                 {section.title}
               </div>
@@ -110,9 +116,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 return (
                   <button
                     key={item.id}
-                    onClick={() => onSelectModule(item.id)}
-                    title={collapsed ? item.label : undefined}
-                    className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded text-xs transition-colors group text-left ${
+                    onClick={() => {
+                      onSelectModule(item.id);
+                      if (onCloseMobile) onCloseMobile();
+                    }}
+                    title={collapsed && !isMobileDrawer ? item.label : undefined}
+                    className={`w-full flex items-center gap-2.5 px-2.5 py-2.5 sm:py-2 rounded text-xs transition-colors group text-left min-h-[40px] sm:min-h-[34px] ${
                       isActive
                         ? 'bg-gov-blue text-white font-medium shadow-xs'
                         : 'text-slate-700 hover:bg-slate-100/80 hover:text-gov-navy'
@@ -124,11 +133,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       }`}
                     />
 
-                    {!collapsed && (
-                      <span className="truncate flex-1 font-medium">{item.label}</span>
+                    {(!collapsed || isMobileDrawer) && (
+                      <span className="truncate flex-1 font-medium text-xs">{item.label}</span>
                     )}
 
-                    {!collapsed && item.badge !== undefined && (
+                    {(!collapsed || isMobileDrawer) && item.badge !== undefined && (
                       <span
                         className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
                           isActive
@@ -144,7 +153,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       </span>
                     )}
 
-                    {collapsed && item.badge !== undefined && (
+                    {collapsed && !isMobileDrawer && item.badge !== undefined && (
                       <span className="w-2 h-2 rounded-full bg-red-600 absolute right-2" />
                     )}
                   </button>
@@ -155,21 +164,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ))}
       </div>
 
-      {/* Collapse / Expand Toggle */}
-      <div className="p-2 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-        {!collapsed && (
-          <div className="text-[10px] text-slate-400 font-mono">
-            PORTAL: GOVERNMENT ADMIN
-          </div>
-        )}
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition mx-auto"
-          title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-        >
-          {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-        </button>
-      </div>
+      {/* Collapse / Expand Toggle (Only on Desktop Sidebar) */}
+      {!isMobileDrawer && (
+        <div className="p-2 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
+          {!collapsed && (
+            <div className="text-[10px] text-slate-400 font-mono">
+              PORTAL: GOVERNMENT ADMIN
+            </div>
+          )}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="p-1.5 rounded hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition mx-auto min-h-[36px] min-w-[36px] flex items-center justify-center"
+            title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+          >
+            {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          </button>
+        </div>
+      )}
     </aside>
   );
 };

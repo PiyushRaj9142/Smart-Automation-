@@ -41,27 +41,27 @@ export const JudgeDemoBar: React.FC<JudgeDemoBarProps> = ({ onNavigateToModule }
   };
 
   return (
-    <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-4xl bg-slate-900/95 text-white backdrop-blur-md border-2 border-gov-blue rounded-lg shadow-2xl p-3.5 animate-in slide-in-from-bottom-5 duration-200">
+    <div className="fixed bottom-2 sm:bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] sm:w-[96%] max-w-4xl bg-slate-900/95 text-white backdrop-blur-md border-2 border-gov-blue rounded-lg shadow-2xl p-2.5 sm:p-3.5 animate-in slide-in-from-bottom-5 duration-200">
       {/* Top Header Row */}
-      <div className="flex items-center justify-between gap-3 pb-2 border-b border-slate-700/80">
-        <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded bg-gov-blue text-white flex items-center justify-center animate-pulse">
-            <Radio className="w-4 h-4" />
+      <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-700/80">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="p-1 rounded bg-gov-blue text-white flex items-center justify-center animate-pulse flex-shrink-0">
+            <Radio className="w-3.5 h-3.5" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-xs tracking-wider uppercase text-amber-300 font-mono">
-                JUDGE EVALUATION STORYLINE
+          <div className="min-w-0 truncate">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="font-bold text-[10px] sm:text-xs tracking-wider uppercase text-amber-300 font-mono truncate">
+                EVALUATION STORYLINE
               </span>
-              <span className="text-[10px] px-1.5 py-0.5 bg-slate-800 text-slate-300 rounded font-mono border border-slate-700">
-                Step {currentStep.stepNumber} of {CADASTRAL_DEMO_STEPS.length} ({progressPercent}%)
+              <span className="text-[9px] sm:text-[10px] px-1.5 py-0.2 bg-slate-800 text-slate-300 rounded font-mono border border-slate-700">
+                {currentStep.stepNumber}/{CADASTRAL_DEMO_STEPS.length} ({progressPercent}%)
               </span>
             </div>
           </div>
         </div>
 
         {/* Right controls: Step Jump & Close */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 flex-shrink-0">
           <select
             value={currentStepIndex}
             onChange={(e) => {
@@ -73,7 +73,7 @@ export const JudgeDemoBar: React.FC<JudgeDemoBarProps> = ({ onNavigateToModule }
                 onNavigateToModule(target.targetModule);
               }
             }}
-            className="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded px-2 py-1 focus:outline-none font-mono"
+            className="bg-slate-800 border border-slate-700 text-slate-200 text-[11px] sm:text-xs rounded px-1.5 sm:px-2 py-1 focus:outline-none font-mono max-w-[130px] xs:max-w-[180px] sm:max-w-none truncate"
           >
             {CADASTRAL_DEMO_STEPS.map((s, idx) => (
               <option key={s.id} value={idx}>
@@ -84,7 +84,7 @@ export const JudgeDemoBar: React.FC<JudgeDemoBarProps> = ({ onNavigateToModule }
 
           <button
             onClick={stopDemo}
-            className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition"
+            className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition min-h-[28px] min-w-[28px] flex items-center justify-center"
             title="Exit Evaluation Storyline"
           >
             <X className="w-4 h-4" />

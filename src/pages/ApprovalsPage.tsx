@@ -139,11 +139,11 @@ export const ApprovalsPage: React.FC<ApprovalsPageProps> = ({ onNavigateToMap })
       </div>
 
       {/* 5-Stage Approval Progression Pipeline Header */}
-      <div className="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-lg p-3.5 sm:p-4 shadow-sm">
         <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 font-mono">
           Statutory Multi-Tier Cadastral Governance Timeline
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
           {[
             { step: '1. AI Generated', count: '18,420', desc: 'Raw polygon extraction', color: 'bg-blue-50 border-blue-200 text-gov-blue' },
             { step: '2. Surveyor Verified', count: '12,430', desc: 'RTK CORS ±2.1cm check', color: 'bg-emerald-50 border-emerald-200 text-emerald-800' },
@@ -549,17 +549,17 @@ export const ApprovalsPage: React.FC<ApprovalsPageProps> = ({ onNavigateToMap })
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
+              <div className="pt-3 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2.5">
                 <button
                   type="button"
                   onClick={() => window.print()}
-                  className="px-4 py-2 border border-slate-300 hover:bg-slate-100 rounded text-xs font-semibold text-slate-700 flex items-center gap-1.5 transition"
+                  className="w-full sm:w-auto px-4 py-2 border border-slate-300 hover:bg-slate-100 rounded text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 transition min-h-[36px]"
                 >
                   <Printer className="w-4 h-4" />
                   <span>Print Document</span>
                 </button>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={() => {
@@ -574,7 +574,7 @@ export const ApprovalsPage: React.FC<ApprovalsPageProps> = ({ onNavigateToMap })
                       link.click();
                       document.body.removeChild(link);
                     }}
-                    className="px-4 py-2 bg-gov-blue hover:bg-gov-navy text-white rounded text-xs font-bold flex items-center gap-1.5 transition shadow-sm"
+                    className="w-full sm:w-auto px-4 py-2 bg-gov-blue hover:bg-gov-navy text-white rounded text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm min-h-[36px]"
                   >
                     <Download className="w-4 h-4" />
                     <span>Download Official Certificate</span>

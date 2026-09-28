@@ -421,39 +421,39 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
   };
 
   return (
-    <div className={`relative isolate bg-slate-900 rounded-lg overflow-hidden border border-slate-300 shadow-gov ${className}`}>
+    <div className={`relative isolate bg-slate-900 rounded-lg overflow-hidden border border-slate-300 shadow-gov w-full min-w-0 ${className}`}>
       {/* Top Map HUD Bar */}
-      <div className="absolute top-3 left-3 right-3 z-[400] flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+      <div className="absolute top-2 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-[400] flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 pointer-events-none">
         {/* Left Search & Project Badge */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="flex items-center gap-1.5 sm:gap-2 pointer-events-auto max-w-full">
           <form onSubmit={handleSearch} className="relative">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search Parcel ID, Khasra, Owner..."
-              className="w-56 sm:w-64 bg-white/95 backdrop-blur text-slate-800 text-xs px-3 py-1.5 pl-8 rounded-md border border-slate-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-gov-blue font-medium"
+              placeholder="Search Parcel, Khasra..."
+              className="w-40 xs:w-48 sm:w-56 md:w-64 bg-white/95 backdrop-blur text-slate-800 text-xs px-2.5 sm:px-3 py-1.5 pl-7 sm:pl-8 rounded-md border border-slate-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-gov-blue font-medium truncate"
             />
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2" />
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2 sm:left-2.5 top-2" />
           </form>
 
-          <div className="hidden md:flex items-center gap-1.5 bg-gov-navy/90 text-white text-xs px-2.5 py-1.5 rounded-md border border-slate-700 shadow-sm font-mono">
-            <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="truncate max-w-[140px]">{selectedProject.name}</span>
+          <div className="hidden lg:flex items-center gap-1.5 bg-gov-navy/90 text-white text-xs px-2.5 py-1.5 rounded-md border border-slate-700 shadow-sm font-mono">
+            <MapPin className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+            <span className="truncate max-w-[120px]">{selectedProject.name}</span>
           </div>
         </div>
 
         {/* Right Base Map Switcher & Zoom Controls */}
-        <div className="flex items-center gap-1.5 pointer-events-auto bg-white/95 backdrop-blur p-1 rounded-md border border-slate-300 shadow-sm">
+        <div className="flex items-center gap-1 sm:gap-1.5 pointer-events-auto bg-white/95 backdrop-blur p-0.5 sm:p-1 rounded-md border border-slate-300 shadow-sm text-xs">
           <select
             value={baseMapType}
             onChange={(e) => setBaseMapType(e.target.value as any)}
-            className="bg-transparent text-slate-800 text-xs font-medium px-2 py-1 focus:outline-none cursor-pointer"
+            className="bg-transparent text-slate-800 text-[11px] sm:text-xs font-medium px-1.5 sm:px-2 py-1 focus:outline-none cursor-pointer max-w-[130px] sm:max-w-none"
           >
-            <option value="satellite">🛰 Drone Ortho / Satellite</option>
-            <option value="topo">⛰ Topographic Elevation</option>
-            <option value="gis">🗺 Carto Vector GIS</option>
-            <option value="osm">🌐 OpenStreetMap</option>
+            <option value="satellite">🛰 Drone Ortho</option>
+            <option value="topo">⛰ Topo DEM</option>
+            <option value="gis">🗺 Carto GIS</option>
+            <option value="osm">🌐 OSM</option>
           </select>
 
           <div className="h-4 w-px bg-slate-300 mx-0.5" />
@@ -461,7 +461,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
           <button
             type="button"
             onClick={() => mapInstanceRef.current?.zoomIn()}
-            className="px-2 py-1 text-slate-700 hover:text-gov-navy hover:bg-slate-100 rounded transition font-bold text-xs"
+            className="px-2 py-1 text-slate-700 hover:text-gov-navy hover:bg-slate-100 active:bg-slate-200 rounded transition font-bold text-xs min-h-[28px] min-w-[24px]"
             title="Zoom In (+)"
           >
             +
@@ -469,7 +469,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
           <button
             type="button"
             onClick={() => mapInstanceRef.current?.zoomOut()}
-            className="px-2 py-1 text-slate-700 hover:text-gov-navy hover:bg-slate-100 rounded transition font-bold text-xs"
+            className="px-2 py-1 text-slate-700 hover:text-gov-navy hover:bg-slate-100 active:bg-slate-200 rounded transition font-bold text-xs min-h-[28px] min-w-[24px]"
             title="Zoom Out (-)"
           >
             −
@@ -480,10 +480,10 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
           <button
             type="button"
             onClick={centerOnProject}
-            className="p-1.5 text-slate-600 hover:text-gov-blue hover:bg-slate-100 rounded transition"
+            className="p-1 sm:p-1.5 text-slate-600 hover:text-gov-blue hover:bg-slate-100 rounded transition min-h-[28px] min-w-[24px] flex items-center justify-center"
             title="Recenter Map"
           >
-            <Crosshair className="w-4 h-4" />
+            <Crosshair className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>
@@ -492,14 +492,14 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
       <div ref={mapContainerRef} className={`w-full ${height}`} />
 
       {/* Collapsible Layer Toggle Control (Floating Left) */}
-      <div className="absolute top-14 left-3 z-[400] flex flex-col items-start gap-1.5 pointer-events-auto">
+      <div className="absolute top-12 sm:top-14 left-2 sm:left-3 z-[400] flex flex-col items-start gap-1.5 pointer-events-auto">
         <button
           type="button"
           onClick={() => setIsLayerPanelOpen(!isLayerPanelOpen)}
-          className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white/95 backdrop-blur text-gov-navy hover:bg-slate-50 border border-slate-300 rounded-md text-xs font-bold shadow-md transition"
+          className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 bg-white/95 backdrop-blur text-gov-navy hover:bg-slate-50 border border-slate-300 rounded-md text-[11px] sm:text-xs font-bold shadow-md transition"
         >
           <Layers className="w-3.5 h-3.5 text-gov-blue" />
-          <span>GIS Layers</span>
+          <span className="hidden xs:inline">GIS Layers</span>
           <span className="text-[10px] px-1.5 py-0.2 bg-blue-100 text-gov-blue rounded font-mono">
             {Object.values(activeLayers).filter(Boolean).length}/7
           </span>
@@ -509,9 +509,9 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
         </button>
 
         {isLayerPanelOpen && (
-          <div className="bg-white/95 backdrop-blur p-3 rounded-lg border border-slate-300 shadow-xl w-56 space-y-2 animate-in fade-in-50 duration-150">
+          <div className="bg-white/95 backdrop-blur p-2.5 sm:p-3 rounded-lg border border-slate-300 shadow-xl w-52 sm:w-56 max-w-[85vw] space-y-2 animate-in fade-in-50 duration-150">
             <div className="flex items-center justify-between pb-1.5 border-b border-slate-200">
-              <span className="text-[11px] font-bold text-gov-navy uppercase tracking-wider">
+              <span className="text-[10px] sm:text-[11px] font-bold text-gov-navy uppercase tracking-wider">
                 Visible Layers
               </span>
               <span className="text-[10px] text-slate-500 font-mono">{parcels.length} PCL</span>
@@ -537,7 +537,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
                 />
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-2.5 bg-red-500 rounded-sm inline-block" />
-                  Buildings (Footprints)
+                  Buildings
                 </span>
               </label>
 
@@ -550,7 +550,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
                 />
                 <span className="flex items-center gap-1">
                   <span className="w-2.5 h-1 bg-amber-500 rounded-sm inline-block" />
-                  Roads & Corridors
+                  Road Corridors
                 </span>
               </label>
 
@@ -573,7 +573,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
                 />
                 <span className="flex items-center gap-1 text-emerald-700 font-semibold">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
-                  Ground Truth (CORS)
+                  Ground Truth
                 </span>
               </label>
 
@@ -586,7 +586,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
                 />
                 <span className="flex items-center gap-1 text-red-700 font-semibold">
                   <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse inline-block" />
-                  Topology Errors ({topologyIssues.filter((i) => i.status === 'Open').length})
+                  Topology ({topologyIssues.filter((i) => i.status === 'Open').length})
                 </span>
               </label>
             </div>
@@ -595,16 +595,16 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
       </div>
 
       {/* Bottom Telemetry HUD */}
-      <div className="absolute bottom-2 left-3 right-3 z-[400] flex flex-wrap items-center justify-between gap-2 pointer-events-none">
-        <div className="bg-slate-900/90 text-slate-200 backdrop-blur px-3 py-1.5 rounded-md border border-slate-700 text-[11px] font-mono flex items-center gap-3 shadow-md pointer-events-auto">
+      <div className="absolute bottom-2 left-2 right-2 z-[400] flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 pointer-events-none">
+        <div className="bg-slate-900/90 text-slate-200 backdrop-blur px-2.5 py-1 sm:py-1.5 rounded-md border border-slate-700 text-[10px] sm:text-[11px] font-mono flex items-center gap-2 sm:gap-3 shadow-md pointer-events-auto flex-wrap">
           <span>LAT: <strong className="text-emerald-400">{cursorCoords.lat}°N</strong></span>
           <span>LNG: <strong className="text-emerald-400">{cursorCoords.lng}°E</strong></span>
-          <span className="hidden sm:inline text-slate-400">UTM: {cursorCoords.utm}</span>
+          <span className="hidden md:inline text-slate-400">UTM: {cursorCoords.utm}</span>
           <span className="text-blue-300">GSD: 2.5cm/px</span>
         </div>
 
         {/* Legend */}
-        <div className="hidden lg:flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-md border border-slate-300 text-[10px] text-slate-700 shadow-md pointer-events-auto">
+        <div className="hidden xl:flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-md border border-slate-300 text-[10px] text-slate-700 shadow-md pointer-events-auto">
           <span className="font-bold uppercase text-slate-500">Legend:</span>
           <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 bg-blue-500 rounded-sm" /> Residential</span>
           <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 bg-pink-500 rounded-sm" /> Commercial</span>
@@ -614,23 +614,35 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
         </div>
       </div>
 
-      {/* Parcel Detail Inspector Drawer */}
+      {/* Mobile Drawer Backdrop */}
       {isDrawerOpen && selectedParcel && (
-        <div className="absolute top-3 right-3 bottom-12 w-80 sm:w-96 z-[500] bg-white rounded-lg shadow-2xl border border-slate-300 flex flex-col overflow-hidden animate-in slide-in-from-right duration-200">
+        <div
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-[550] sm:hidden"
+          onClick={() => setIsDrawerOpen(false)}
+        />
+      )}
+
+      {/* Parcel Detail Inspector Drawer / Bottom Sheet */}
+      {isDrawerOpen && selectedParcel && (
+        <div className="fixed inset-x-0 bottom-0 max-h-[82vh] rounded-t-xl z-[600] bg-white border-t border-slate-300 shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-200 sm:absolute sm:inset-auto sm:top-3 sm:right-3 sm:bottom-3 sm:w-96 sm:rounded-lg sm:border sm:shadow-gov-lg sm:slide-in-from-right">
+          {/* Mobile Drag Handle */}
+          <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto my-1.5 sm:hidden" />
+
           {/* Header */}
-          <div className="p-3.5 bg-gov-navy text-white flex items-center justify-between border-b border-slate-700">
+          <div className="px-4 py-2.5 sm:py-3 bg-gov-navy text-white flex items-center justify-between border-b border-slate-700">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-amber-300 font-mono">{selectedParcel.id}</span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-slate-800 text-slate-200 rounded">
+                <span className="text-sm font-semibold text-white tracking-wide">{selectedParcel.id}</span>
+                <span className="text-[10px] px-1.5 py-0.5 bg-slate-800 text-slate-200 rounded border border-slate-700 font-mono">
                   Khasra {selectedParcel.khasraNo}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 truncate">{selectedParcel.ownerName}</p>
+              <p className="text-xs text-slate-300 truncate mt-0.5">{selectedParcel.ownerName}</p>
             </div>
             <button
               onClick={() => setIsDrawerOpen(false)}
-              className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800"
+              className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition min-h-[32px] min-w-[32px] flex items-center justify-center font-bold"
+              title="Close panel"
             >
               ✕
             </button>
@@ -639,65 +651,75 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
           {/* Drawer Body */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs text-slate-700">
             {/* High-res Drone Crop Preview */}
-            <div className="relative rounded-lg overflow-hidden border border-slate-200 bg-slate-100 h-32 flex items-center justify-center">
+            <div className="relative rounded-lg overflow-hidden border border-slate-200 bg-slate-100 h-28 flex items-center justify-center">
               <img
                 src={
                   selectedParcel.fieldPhotoUrl ||
                   'https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=600&auto=format&fit=crop&q=60'
                 }
-                alt="Drone Crop"
+                alt="Drone Orthomosaic Clip"
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-2 left-2 bg-slate-900/80 text-white text-[10px] px-2 py-0.5 rounded font-mono">
-                ORI 2.5cm Orthomosaic Clip
+                Drone Orthomosaic (2.5 cm GSD)
               </div>
             </div>
 
-            {/* Core Cadastral Attributes */}
+            {/* Core Cadastral Attributes Grid */}
             <div className="grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-bold">Calculated Area</span>
-                <p className="text-sm font-bold text-gov-navy">{selectedParcel.areaSqM} m²</p>
+                <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Calculated Area</span>
+                <p className="text-sm font-semibold text-gov-navy mt-0.5">{selectedParcel.areaSqM} m²</p>
                 <p className="text-[10px] text-slate-500 font-mono">({selectedParcel.areaSqFt} sq ft)</p>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-bold">Land Use</span>
-                <p className="text-xs font-semibold text-blue-700 mt-0.5">{selectedParcel.landUse}</p>
+                <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Land Use</span>
+                <p className="text-xs font-semibold text-gov-blue mt-0.5">{selectedParcel.landUse}</p>
                 <p className="text-[10px] text-slate-500">{selectedParcel.buildingStatus}</p>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-bold">AI Confidence</span>
+                <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Boundary Confidence</span>
                 <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className="font-bold text-emerald-600 text-xs">{selectedParcel.aiConfidence}%</span>
-                  <div className="w-16 bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-emerald-500 h-full" style={{ width: `${selectedParcel.aiConfidence}%` }} />
+                  <span className="font-semibold text-slate-800 text-xs">{selectedParcel.aiConfidence}%</span>
+                  <div className="w-14 bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-emerald-600 h-full" style={{ width: `${selectedParcel.aiConfidence}%` }} />
                   </div>
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] text-slate-500 uppercase font-bold">GT Status</span>
+                <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Verification Status</span>
                 <p className="text-xs font-semibold text-slate-800 mt-0.5 flex items-center gap-1">
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      selectedParcel.gtStatus === 'Verified' ? 'bg-emerald-500' : 'bg-amber-500'
+                      selectedParcel.gtStatus === 'Verified' ? 'bg-emerald-600' : 'bg-amber-500'
                     }`}
                   />
                   {selectedParcel.gtStatus}
                 </p>
+              </div>
+
+              <div>
+                <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Assigned Surveyor</span>
+                <p className="text-xs text-slate-700 mt-0.5 truncate">{selectedParcel.assignedSurveyorName || 'Rahul Kumar'}</p>
+              </div>
+
+              <div>
+                <span className="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Last Updated</span>
+                <p className="text-xs text-slate-700 mt-0.5 font-mono">28 Sep 2026</p>
               </div>
             </div>
 
             {/* GNSS & CORS Telemetry */}
             <div className="border border-slate-200 rounded-lg p-3 bg-white space-y-1.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-slate-800 flex items-center gap-1">
-                  <Radio className="w-3.5 h-3.5 text-blue-600" />
+                <span className="text-[11px] font-semibold text-slate-800 flex items-center gap-1.5">
+                  <Radio className="w-3.5 h-3.5 text-gov-blue" />
                   GNSS / CORS Survey Data
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded">
+                <span className="text-[10px] px-1.5 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold rounded">
                   {selectedParcel.gnssData.gnssStatus}
                 </span>
               </div>
@@ -712,20 +734,20 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
               </div>
             </div>
 
-            {/* Approval Workflow Stage */}
+            {/* Cadastral Workflow Timeline */}
             <div className="border border-slate-200 rounded-lg p-3 bg-white space-y-2">
-              <span className="text-[11px] font-bold text-slate-800 flex items-center gap-1">
+              <span className="text-[11px] font-semibold text-slate-800 flex items-center gap-1.5">
                 <CheckCircle className="w-3.5 h-3.5 text-gov-blue" />
-                Cadastral Workflow Status
+                Cadastral Workflow Progress
               </span>
 
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {selectedParcel.timeline.map((step, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-[11px]">
                     <span
                       className={`w-2 h-2 rounded-full mt-1 flex-shrink-0 ${
                         step.status === 'Completed'
-                          ? 'bg-emerald-500'
+                          ? 'bg-emerald-600'
                           : step.status === 'Flagged'
                           ? 'bg-red-500'
                           : 'bg-slate-300'
@@ -746,21 +768,29 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
           </div>
 
           {/* Footer Actions */}
-          <div className="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-2">
-            {currentRole === 'GOVERNMENT_ADMIN' && selectedParcel.approvalStatus !== 'Government Approved' && (
+          <div className="p-3 bg-slate-50 border-t border-slate-200 flex flex-col gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <button
+                type="button"
                 onClick={() => approveParcel(selectedParcel.id)}
-                className="flex-1 py-2 bg-gov-blue hover:bg-blue-700 text-white font-bold text-xs rounded-md shadow-sm flex items-center justify-center gap-1.5 transition"
+                className="py-2.5 sm:py-1.5 px-3 bg-gov-blue hover:bg-gov-navy active:bg-gov-navy text-white text-xs font-medium rounded transition shadow-xs flex items-center justify-center gap-1.5 min-h-[42px] sm:min-h-[34px]"
               >
-                <FileCheck className="w-3.5 h-3.5" />
-                Sanction & Approve
+                <FileCheck className="w-4 h-4" />
+                <span>Verify Record</span>
               </button>
-            )}
+              <button
+                type="button"
+                onClick={() => alert(`Editing boundary vertices for ${selectedParcel.id}...`)}
+                className="py-2.5 sm:py-1.5 px-3 bg-white hover:bg-slate-100 active:bg-slate-200 border border-slate-300 text-slate-700 text-xs font-medium rounded transition min-h-[42px] sm:min-h-[34px]"
+              >
+                Edit Boundary
+              </button>
+            </div>
 
             {selectedParcel.approvalStatus === 'Government Approved' && (
-              <div className="w-full text-center py-2 bg-emerald-50 border border-emerald-200 rounded text-emerald-800 font-bold text-xs flex items-center justify-center gap-1">
-                <CheckCircle className="w-4 h-4 text-emerald-600" />
-                Approved Cadastral Record ({selectedParcel.certificateNo})
+              <div className="w-full text-center py-1.5 bg-emerald-50 border border-emerald-200 rounded text-emerald-800 font-medium text-xs flex items-center justify-center gap-1">
+                <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Gazette Approved ({selectedParcel.certificateNo})</span>
               </div>
             )}
           </div>

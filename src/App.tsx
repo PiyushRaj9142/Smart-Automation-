@@ -64,10 +64,12 @@ const MainAppContent: React.FC = () => {
   const [activeAdminModuleId, setActiveAdminModuleId] = useState<string>('dashboard');
   const [activeViewMode, setActiveViewMode] = useState<'desktop' | 'mobile'>('desktop');
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
 
   // Sync browser URL with routing
   const navigateTo = (route: AppRoute) => {
     setCurrentRoute(route);
+    setIsMobileNavOpen(false);
     if (window.location.pathname !== route) {
       window.history.pushState(null, '', route);
     }
@@ -77,6 +79,7 @@ const MainAppContent: React.FC = () => {
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
+      setIsMobileNavOpen(false);
       if (path === '/admin') {
         setCurrentRoute('/admin');
         setCurrentRole('GOVERNMENT_ADMIN');
@@ -207,7 +210,7 @@ const MainAppContent: React.FC = () => {
     const currentModuleTitle = adminModuleTitles[activeAdminModuleId] || 'Admin Command Center';
 
     return (
-      <div className="min-h-screen bg-gov-bg flex flex-col selection:bg-gov-blue selection:text-white">
+      <div className="min-h-screen bg-gov-bg flex flex-col selection:bg-gov-blue selection:text-white relative">
         {/* Consistent Government Header */}
         <Header
           currentModuleTitle={currentModuleTitle}
@@ -216,22 +219,71 @@ const MainAppContent: React.FC = () => {
           onBackToLanding={() => navigateTo('/')}
           onSwitchPortal={(portal) => navigateTo(portal)}
           onOpenNotifications={() => setActiveAdminModuleId('approvals')}
+          onToggleMobileNav={() => setIsMobileNavOpen(!isMobileNavOpen)}
+          isMobileNavOpen={isMobileNavOpen}
         />
 
-        {/* Main Body Viewport */}
-        <div className="flex-1 flex overflow-hidden">
-          {/* Admin Sidebar with all 12 modules */}
-          {activeViewMode === 'desktop' && (
-            <Sidebar
-              activeModuleId={activeAdminModuleId}
-              onSelectModule={(modId) => setActiveAdminModuleId(modId)}
-              collapsed={sidebarCollapsed}
-              setCollapsed={setSidebarCollapsed}
+        {/* Mobile Navigation Drawer Overlay */}
+        {isMobileNavOpen && (
+          <div className="lg:hidden fixed inset-0 z-50 flex">
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+              onClick={() => setIsMobileNavOpen(false)}
             />
-          )}
+
+            {/* Slide-in Drawer */}
+            <div className="relative w-72 max-w-[85vw] bg-white h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200">
+              {/* Drawer Top Header */}
+              <div className="px-4 py-3 bg-gov-navy text-white flex items-center justify-between border-b border-slate-700">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-bold text-xs tracking-wide">ADMIN NAVIGATION</span>
+                </div>
+                <button
+                  onClick={() => setIsMobileNavOpen(false)}
+                  className="p-1 rounded text-slate-300 hover:text-white hover:bg-slate-800 transition text-sm font-bold min-h-[36px] min-w-[36px] flex items-center justify-center"
+                  aria-label="Close navigation menu"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Drawer Content */}
+              <div className="flex-1 overflow-y-auto">
+                <Sidebar
+                  activeModuleId={activeAdminModuleId}
+                  onSelectModule={(modId) => {
+                    setActiveAdminModuleId(modId);
+                    setIsMobileNavOpen(false);
+                  }}
+                  collapsed={false}
+                  setCollapsed={() => {}}
+                  isMobileDrawer={true}
+                  onCloseMobile={() => setIsMobileNavOpen(false)}
+                />
+              </div>
+
+              {/* Drawer Footer */}
+              <div className="p-3 border-t border-slate-200 bg-slate-50 text-[11px] text-slate-500 font-mono text-center">
+                MoHUA Cadastral Portal v2.4
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Main Body Viewport */}
+        <div className="flex-1 flex overflow-hidden min-w-0">
+          {/* Admin Desktop Sidebar (Hidden on mobile via hidden lg:flex) */}
+          <Sidebar
+            activeModuleId={activeAdminModuleId}
+            onSelectModule={(modId) => setActiveAdminModuleId(modId)}
+            collapsed={sidebarCollapsed}
+            setCollapsed={setSidebarCollapsed}
+          />
 
           {/* Dynamic Workspace Content */}
-          <main className="flex-1 overflow-y-auto pb-24">
+          <main className="flex-1 overflow-y-auto pb-24 min-w-0">
             {activeViewMode === 'mobile' ? (
               <FieldMobilePage />
             ) : (
